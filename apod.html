@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>NASA APOD Explorer</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <style>      
+      body { padding-top: 75px; }
+      .footer { line-height: 30px; }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <div class="container">
+      <a class="navbar-brand" href="#">APOD Explorer</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="modal" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" target="_blank" href="https://apod.nasa.gov/apod/lib/about_apod.html">APOD</a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </nav>
+    
+    <div class="container">      
+      <div id="top" class="jumbotron">
+        <h1 class="display-3">Title</h1>
+        <p class="lead sub-title">Sub Title</p>
+        <img class="thumb" width="100%" src="http://via.placeholder.com/350x150">
+        <hr class="my-4">
+        <h3>Explanation</h3>
+        <p class="description">The explanation of the image.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg btn-sd" href="#" download>Get SD image</a>
+          <a class="btn btn-primary btn-lg btn-hd" href="#" download>Get HD image</a>
+        </p>
+      </div>
+    </div>
+    
+    <footer class="footer bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-xs-6">
+            <span class="badge-dark">nJoy !!!</span>
+          </div>
+          <div class="col-lg-6 col-md-6 col-xs-6">
+            <span class="float-lg-right"><a href="#top" class="badge-dark">Back to top</a></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <div class="modal" id="about">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">About APOD Explorer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Provides information about NASA's Astronomy Picture of the Day.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+      (function() {
+        $.ajax("https://api.nasa.gov/planetary/apod?api_key=JlGhkwnrv8mTDOl1zimEX3W5VsyXXULK3eo8TRwq")
+        .done(function(data) {
+          //console.log(data);
+          $(".jumbotron .display-3").text(data.title);
+          $(".jumbotron .sub-title").text(data.date);
+          $(".jumbotron .description").text(data.explanation);
+          $(".jumbotron .thumb").prop('src', data.url);
+          $(".jumbotron .btn-sd").prop('href', data.url);
+          $(".jumbotron .btn-hd").prop('href', data.hdurl);
+        })
+        .fail(function() {
+          alert("Sorry, unable to load the information.");
+        });
+      })();
+    </script>
+  </body>
+</html>
