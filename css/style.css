@@ -123,3 +123,33 @@ footer p,
 footer a {
     font-size: 13px;
 }
+
+.ms-badge {
+    border: 1px solid #e5e5e5;
+    color: #333;
+    font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 0.88rem;
+    padding: 22px 0;
+    text-align: center;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ms-badge-name {
+    color: #333;
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1.1em;
+    margin: 8px;
+}
+
+.ms-badge-issuer {
+    color: #666;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.1em;
+    margin: 0 8px;
+    max-width: 100%;
+    overflow: hidden;
+}
