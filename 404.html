@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found · Bhuban Mohan Mishra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root,
+  [data-theme="dark"] {
+    --bg-base:    #111111;
+    --bg-nav:     rgba(17,17,17,0.88);
+    --text-primary: #f0ebe4;
+    --text-muted:   #7a6e66;
+    --text-sub:     #9a8e86;
+    --accent:       #b87333;
+    --accent2:      #d4956a;
+    --accent-faint: rgba(184,115,51,0.18);
+    --accent-border:rgba(184,115,51,0.22);
+    --border:       rgba(255,255,255,0.06);
+    --btn-primary-color: #111111;
+    --grid-color:   rgba(184,115,51,0.05);
+  }
+
+  [data-theme="light"] {
+    --bg-base:    #f7f4ef;
+    --bg-nav:     rgba(247,244,239,0.92);
+    --text-primary: #1c1410;
+    --text-muted:   #8b7355;
+    --text-sub:     #6b5a4a;
+    --accent:       #8b5a2b;
+    --accent2:      #b87333;
+    --accent-faint: rgba(139,90,43,0.1);
+    --accent-border:rgba(139,90,43,0.25);
+    --border:       rgba(0,0,0,0.07);
+    --btn-primary-color: #f7f4ef;
+    --grid-color:   rgba(139,90,43,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 4rem;
+    background: var(--bg-nav);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--accent-border);
+    transition: background 0.4s;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--accent-border);
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    padding: 0.45rem 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-faint);
+  }
+
+  .toggle-icon { transition: transform 0.4s; }
+  [data-theme="light"] .toggle-icon { transform: rotate(180deg); }
+
+  /* Main content */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+  }
+
+  .container {
+    text-align: center;
+    max-width: 540px;
+  }
+
+  .error-code {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(6rem, 18vw, 12rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.15;
+    letter-spacing: -0.04em;
+    margin-bottom: -1.5rem;
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  .error-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    animation: fadeUp 0.8s 0.2s both;
+  }
+
+  .error-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    animation: fadeUp 0.8s 0.3s both;
+  }
+
+  .error-title em { font-style: italic; color: var(--accent); }
+
+  .error-desc {
+    font-size: 0.95rem;
+    color: var(--text-sub);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s 0.4s both;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.5s both;
+  }
+
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: var(--btn-primary-color);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+
+  .btn-secondary {
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--accent-border);
+    padding: 1.2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 0.15; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.5rem; }
+    footer { padding: 1rem 1.5rem; flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">BMM</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <span class="toggle-icon">☽</span>
+    <span id="toggleLabel">Light</span>
+  </button>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="error-code">404</div>
+    <p class="error-label">Page Not Found</p>
+    <h1 class="error-title">This page doesn't <em>exist.</em></h1>
+    <p class="error-desc">
+      The page you're looking for may have moved or never existed.<br>
+      Head back to the portfolio — everything worth finding is there.
+    </p>
+    <div class="error-actions">
+      <a href="/" class="btn-primary">Back to Portfolio</a>
+      <a href="mailto:bhuban.mishra@outlook.com" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Bhuban Mohan Mishra</p>
+  <p>Enterprise Architect · AI & Cloud Transformation Leader</p>
+</footer>
+
+<script>
+  const html   = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const label  = document.getElementById('toggleLabel');
+
+  function applyTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    localStorage.setItem('theme', theme);
+  }
+
+  const saved  = localStorage.getItem('theme');
+  const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  applyTheme(saved || system);
+
+  toggle.addEventListener('click', () => {
+    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>
