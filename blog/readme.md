@@ -1,3 +1,3 @@
 # Blogs
 
-[blog/angular-modernization-blueprint]
+- [Angular Modernization Blueprint](angular-modernization-blueprint.html)
